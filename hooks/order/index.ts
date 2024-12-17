@@ -4,7 +4,7 @@ import {  PaymentStatus } from "@prisma/client";
 import { sendOrderConfirmationEmail } from "@/lib/email";
 import {  onUpdateOrderStatus } from "@/actions/orders";
 import { EmailPayload, onSendPurchaseEmail } from "@/actions/email";
-import toast from "react-hot-toast";
+import { toast} from "react-hot-toast"
 
 export function useOrderActions() {
   const [isUpdating, setIsUpdating] = useState(false);
@@ -30,6 +30,7 @@ export function useOrderActions() {
       if (updateResponse.status !== 200) {
         return toast.error(updateResponse.message);
       }
+      toast.success("Order status updated successfully")
 
 
       if (emailPayload) {
@@ -39,8 +40,10 @@ export function useOrderActions() {
           toast.error("Something went wrong. Please send the email manually.")
         }else{
           setLoadingText("E-book has been delivered successfully!")
+
           toast.success("E-book has been delivered successfully!")
         }
+        toast.success("E-book has been delivered successfully!")
       }
     } catch (error) {
       toast.error("Failed to update order status")
